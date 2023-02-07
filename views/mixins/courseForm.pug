@@ -1,0 +1,7 @@
+mixin courseForm(course, department, saveURL, cancelURL)
+
+    div.form-container
+        form(action=saveURL mathod='post')
+            div.form-input
+                label(for='name') Course Title
+                input(id='name' name='name' value=course.name)
