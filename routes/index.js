@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const courseController = require('../controllers/courseController.js');
+const studentsController = require('../controllers/studentsController.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -20,5 +21,10 @@ router.get('/courses/add', courseController.renderAddForm);
 router.post('/courses/add', courseController.addCourse);
 
 router.get('/courses/delete/:id', courseController.deleteCourse);
+
+
+router.get('/students', studentsController.viewAll);
+
+router.get('/students/profile/:id', studentsController.viewProfile);
 
 module.exports = router;
