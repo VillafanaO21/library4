@@ -27,4 +27,14 @@ router.get('/students', studentsController.viewAll);
 
 router.get('/students/profile/:id', studentsController.viewProfile);
 
+router.get('/students/edit/:id', studentsController.renderEditForm);
+
+router.post('/students/edit/:id', studentsController.updateStudent);
+
+router.get('/students/add', studentsController.renderAddForm);
+
+router.post('/students/add', studentsController.addStudent);
+
+router.get('/students/delete/:id', studentsController.deleteStudent);
+
 module.exports = router;
