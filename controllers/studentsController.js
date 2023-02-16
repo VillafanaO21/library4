@@ -8,8 +8,17 @@ module.exports.viewAll = async function (req, res) {
 
 //profile
 module.exports.viewProfile = async function (req, res) {
-    const student = await Student.findByPk(req.params.id);
-    res.render('student/profile', {student})
+    const student = await Student.findByPk(req.params.id,{
+        include: 'courses'
+    });
+    const courses = await Course.findAll();
+    let availableCourses = [];
+    for (let i=0; i<courses.length; i++){
+        if (!studentHasCourse(student, courses[i])){
+            availableCourses.push(course[i]);
+        }
+    }
+    res.render('student/profile', {student, availableCourses})
 }
 
 //render add
@@ -63,4 +72,12 @@ module.exports.updateStudent = async function (req, res) {
         }
     });
     res.redirect(`/students/profile/${req.params.id}`);
+}
+function studentHasCourse(student, course) {
+    for (let i=0; i<student.course.length; i++){
+        if (course.id === student.courses[i].id){
+            return true
+        }
+    }
+    return false
 }
