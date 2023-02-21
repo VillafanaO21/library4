@@ -26,11 +26,11 @@ module.exports.viewProfile= async function(req,res) {
 module.exports.renderAddForm = function(req, res){
     const course = {
         name:'',
-        departments: department[0],
+        department: departments[0],
         instructor_name: '',
         description:''
     }
-    res.render('courses/add', {course, department});
+    res.render('courses/add', {course, departments});
 }
 
 //add
@@ -94,5 +94,15 @@ module.exports.enrollStudent= async function(req, res){
 }
 
 function courseHasStudent(course, student) {
+}
 
+//remove a student from a course
+module.exports.removeStudent = async function(req, res){
+    await StudentCourses.destroy({
+        where: {
+            course_id: req.params.courseId,
+            student_id: req.params.student_id
+        }
+    });
+    res.redirect(`/courses/profile/${req.params.courseId}`);
 }

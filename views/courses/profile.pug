@@ -12,7 +12,7 @@ block content
         h4 Available Students
         form(action=`/courses/${course.id}/enroll` method= 'post')
             select(name='student' id='student' autocomplete=off)
-                each students in availableStudents
+                each student in availableStudents
                     option(value= student.id) #{student.first_name}
             button.button(type='submit') Enroll
 
@@ -32,3 +32,4 @@ block content
                         td= student.grade_level
                         td
                             a(href=`/students/profile/${student.id}`) View Student
+                            a(href=`/courses/${course.id}/removeStudemt/${student.id}`) Remove Student
