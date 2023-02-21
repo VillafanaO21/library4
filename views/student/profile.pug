@@ -13,7 +13,7 @@ block content
         select(name='course' id='course' autocomplete=off)
             each course in availableCourses
                 option(value=course.id) #{course.name}
-        button.button(type='submit') Enroll
+        button.button.primary(type='submit') Enroll
     table
         thead
             tr

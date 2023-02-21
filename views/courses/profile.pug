@@ -10,11 +10,14 @@ block content
         p= course.description
     div.students
         h4 Available Students
-        form(action=`/courses/${course.id}/enroll` method= 'post')
-            select(name='student' id='student' autocomplete=off)
-                each student in availableStudents
-                    option(value= student.id) #{student.first_name}
-            button.button(type='submit') Enroll
+        if availableStudents.length>0
+            form(action=`/courses/${course.id}/enroll` method= 'post')
+                select(name='student' id='student' autocomplete=off)
+                    each student in availableStudents
+                        option(value= student.id) #{student.first_name}
+                button.button.primary(type='submit') Enroll
+        else
+            p No remaining students are eligible
 
         h4 Enrolled Students
         table
@@ -32,4 +35,4 @@ block content
                         td= student.grade_level
                         td
                             a(href=`/students/profile/${student.id}`) View Student
-                            a(href=`/courses/${course.id}/removeStudemt/${student.id}`) Remove Student
+                            a(href=`/courses/${course.id}/removeStudent/${student.id}`) Remove Student
