@@ -76,7 +76,7 @@ label{
 }
 
 .button{
-    border-raiuds: 12px;
+    border-radius: 12px;
     padding: 4px 8px;
     border: 1px solid grey;
     color: black;
@@ -85,7 +85,7 @@ label{
 
 .button.primary {
     background-color: #075985;
-    color:white;
+    color: white;
     border-color: #075985;
 }
 
