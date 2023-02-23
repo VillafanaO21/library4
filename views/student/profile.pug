@@ -17,11 +17,6 @@ block content
             button.button.primary(type='submit') Enroll
     else
         p No remaning courses are available to enroll in.
-    form(action=`/students/${student.id}/enroll/` method='post')
-        select(name='course' id='course' autocomplete=off)
-            each course in availableCourses
-                option(value=course.id) #{course.name}
-        button.button.primary(type='submit') Enroll
     h4 Enrolled Courses
     if student.courses.length>0
         table
