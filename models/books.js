@@ -12,25 +12,28 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Course.belongsToMany(models.Student, {
-        through: 'student_courses',
-        as:'students',
-        foreignKey: 'course_id',
-        otherKey: 'student_id',
+        through: 'author_book_courses',
+        as:'authors',
+        foreignKey: 'book_id',
+        otherKey: 'author_id',
         timestamps:false
       })
     }
   };
   Course.init({
-    name: DataTypes.STRING,
-    instructor_name: DataTypes.STRING,
-    department: DataTypes.STRING,
-    description: DataTypes.STRING
+    title: DataTypes.STRING,
+    genre: DataTypes.STRING,
+    cover: DataTypes.STRING,
+    pages: DataTypes.INTEGER,
+    description: DataTypes.STRING,
+    author: DataTypes.STRING,
+    publisher: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Course',
+    modelName: 'Book',
     timestamps:false,
-    tableName: 'courses'
+    tableName: 'Books'
 
   });
-  return Course;
+  return Book;
 };

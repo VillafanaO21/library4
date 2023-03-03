@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Student.belongsToMany(models.Course, {
-        through: 'student_courses',
-        as: 'courses',
-        foreignKey: 'student_id',
-        otherKey: 'course_id',
+        through: 'author_courses',
+        as: 'book',
+        foreignKey: 'author_id',
+        otherKey: 'book_id',
         timestamps: false
       })
     }
@@ -23,12 +23,13 @@ module.exports = (sequelize, DataTypes) => {
   Student.init({
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    grade_level: DataTypes.INTEGER
+    written_book: DataTypes.STRING,
+    date_of_birth: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'Student',
+    modelName: 'Author',
     timestamps: false,
-    tableName: 'students'
+    tableName: 'Authors'
   });
   return Student;
 };
