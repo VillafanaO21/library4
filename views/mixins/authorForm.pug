@@ -1,4 +1,4 @@
-mixin studentForm(student, saveURL, cancelURL)
+mixin authorForm(authors, saveURL, cancelURL)
 
     div.form-container
         form(action=saveURL method='post')
@@ -11,10 +11,10 @@ mixin studentForm(student, saveURL, cancelURL)
                 input(id='last_name' name='last_name' value= student.last_name)
 
             div.form-input
-                label(for='grade_level') Grade
-                select(id='grade_level' name='grade_level')
-                    each grade in [9, 10, 11, 12]
-                        option(value=grade seledcted = (grade === student.grade_level)) #{grade}
+                label(for='written_books') Written Books
+                select(id='written_books' name='written_books')
+                    each written_books in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        option(value=written_books seledcted = (written_books === author.written_books)) #{grade}
 
             div.form-buttons
                 a.button(href=cancelURL) Cancel

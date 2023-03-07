@@ -3,7 +3,7 @@ const {Student, Course, StudentCourses} = require('../models')
 //view all
 module.exports.viewAll = async function (req, res) {
     const students = await Student.findAll();
-    res.render('student/view_all', {students});
+    res.render('author/view_all', {students});
 }
 
 //profile
@@ -18,7 +18,7 @@ module.exports.viewProfile = async function (req, res) {
             availableCourses.push(courses[i]);
         }
     }
-    res.render('student/profile', {student, availableCourses})
+    res.render('author/profile', {student, availableCourses})
 }
 
 //render add
@@ -28,7 +28,7 @@ module.exports.renderAddForm = function (req, res) {
         last_name: '',
         grade_level: 9,
     }
-    res.render('student/add', {student});
+    res.render('author/add', {student});
 }
 
 //add
@@ -44,7 +44,7 @@ module.exports.addStudent = async function (req, res) {
 //render edit
 module.exports.renderEditForm = async function (req, res) {
     const student = await Student.findByPk(req.params.id);
-    res.render('student/edit', {student});
+    res.render('author/edit', {student});
 }
 
 //edit
@@ -82,7 +82,7 @@ function studentHasCourse(student, course) {
     return false
 }
 
-//Add course to student
+//Add course to author
 module.exports.enrollStudent = async function (req, res) {
 
     await StudentCourses.create({
