@@ -26,56 +26,60 @@ module.exports.renderAddForm = function (req, res) {
     const student = {
         first_name: '',
         last_name: '',
-        grade_level: 9,
+        written_books: '',
+        date_of_birth:'',
     }
-    res.render('author/add', {student});
+    res.render('author/add', {Authors});
 }
 
 //add
-module.exports.addStudent = async function (req, res) {
+module.exports.addAuthor = async function (req, res) {
     const student = await Student.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        grade_level: req.body.grade_level
+        written_books: req.body.written_books,
+        date_of_birth: req.body.date_of_birth
+
     });
-    res.redirect(`/students/profile/${student.id}`);
+    res.redirect(`/authors/profile/${author.id}`);
 }
 
 //render edit
 module.exports.renderEditForm = async function (req, res) {
-    const student = await Student.findByPk(req.params.id);
-    res.render('author/edit', {student});
+    const author = await Author.findByPk(req.params.id);
+    res.render('author/edit', {author});
 }
 
 //edit
 
 //delete
-module.exports.deleteStudent = async function(req, res){
-    await Student.destroy({
+module.exports.deleteAuthor = async function(req, res){
+    await Author.destroy({
         where: {
             id:req.params.id
         }
     });
-    res.redirect('/students');
+    res.redirect('/authors');
 }
 
 //update
-module.exports.updateStudent = async function (req, res) {
-    const student = await Student.update({
+module.exports.updateAuthor = async function (req, res) {
+    const author = await Author.update({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        grade_level: req.body.grade_level,
+        written_books: req.body.written_books,
+        date_of_birth: req.body.date_of_birth
 
     }, {
         where: {
             id: req.params.id
         }
     });
-    res.redirect(`/students/profile/${req.params.id}`);
+    res.redirect(`/authors/profile/${req.params.id}`);
 }
-function studentHasCourse(student, course) {
-    for (let i=0; i<student.courses.length; i++){
-        if (course.id === student.courses[i].id){
+function authorHasBooks(author, book) {
+    for (let i=0; i<author.books.length; i++){
+        if (book.id === author.books[i].id){
             return true
         }
     }
@@ -83,22 +87,22 @@ function studentHasCourse(student, course) {
 }
 
 //Add course to author
-module.exports.enrollStudent = async function (req, res) {
+module.exports.addAuthor = async function (req, res) {
 
-    await StudentCourses.create({
-        student_id: req.body.studentId,
-        course_id: req.body.course
+    await Authorsbooks.create({
+        author_id: req.body.authorId,
+        book_id: req.body.book
     })
-    res.redirect(`/students/profile/${req.params.studentId}`);
+    res.redirect(`/books/profile/${req.params.bookId}`);
 }
 
-//delete course from students
-module.exports.removeCourse = async function(req, res){
-    await StudentCourses.destroy({
+//delete books from author
+module.exports.removeBook = async function(req, res){
+    await Authorsbooks.destroy({
         where: {
-            student_id: req.params.studentId,
-            course_id: req.params.course_id
+            author_id: req.params.authortId,
+            booke_id: req.params.book_id
         }
     });
-    res.redirect(`/students/profile/${req.params.studentId}`)
+    res.redirect(`/auhtors/profile/${req.params.authorId}`)
 }
