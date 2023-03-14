@@ -4,11 +4,11 @@ mixin authorForm(authors, saveURL, cancelURL)
         form(action=saveURL method='post')
             div.form-input
                 label(for='first_name') First Name
-                input(id='first_name' name='first_name' value= student.first_name)
+                input(id='first_name' name='first_name' value= author.first_name)
 
             div.form-input
                 label(for='last_name') Last Name
-                input(id='last_name' name='last_name' value= student.last_name)
+                input(id='last_name' name='last_name' value= author.last_name)
 
             div.form-input
                 label(for='written_books') Written Books

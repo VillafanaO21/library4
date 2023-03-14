@@ -14,8 +14,8 @@ module.exports.viewProfile= async function(req,res) {
     const students = await Author.findAll();
     let availableStudents = [];
     for (let i = 0; i < students.length; i++) {
-        if (!bookHasAuthor(course, students[i])) {
-            availableAuthors.push(students[i])
+        if (!bookHasAuthor(book, authors[i])) {
+            availableAuthors.push(authors[i])
         }
     }
     res.render('books/profile', {book, availableAuthors})
@@ -35,7 +35,7 @@ module.exports.renderAddForm = function(req, res){
 }
 
 //add
-module.exports.addCourse = async function(req, res){
+module.exports.addBook = async function(req, res){
     const course = await Book.create({
         title:req.body.title,
         genre:req.body.genre,
@@ -70,22 +70,6 @@ module.exports.updateBooks = async function(req, res){
     });
     res.redirect(`/book/profile/${req.params.id}`);
 }
-//update
-module.exports.updateBooks = async function(req, res){
-    const course = await Book.update({
-        title:req.body.title,
-        genre:req.body.genre,
-        cover:req.body.cover,
-        pages:req.body.pages,
-        author:req.body.author,
-        publisher:req.body.publisher,
-    }, {
-        where: {
-            id: req.params.id
-        }
-    });
-    res.redirect(`/books/profile/${req.params.id}`);
-}
 
 //delete
 module.exports.deleteBook = async function(req, res){
@@ -110,7 +94,7 @@ function courseHasAuthors(book, author) {
 module.exports.enrollAuthors= async function(req, res){
     await authorsbooks.create({
         author_id: req.body.author,
-        book_id: req.params.bookId
+        book_id: req.params.book_id
     });
     res.redirect(`/books/profile/${req.params.bookId}`)
 }
